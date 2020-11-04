@@ -169,6 +169,8 @@ ReactRailsUJS.handleUnmount = function(e) {
 if (typeof window !== "undefined") {
   // Only setup events for browser (not server-rendering)
   ReactRailsUJS.detectEvents()
+
+  global.ReactRailsUJS = ReactRailsUJS
 }
 
 // It's a bit of a no-no to populate the global namespace,

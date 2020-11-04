@@ -7,7 +7,7 @@
 		exports["ReactRailsUJS"] = factory(require("react"), require("react-dom"), require("react-dom/server"));
 	else
 		root["ReactRailsUJS"] = factory(root["React"], root["ReactDOM"], root["ReactDOMServer"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -106,13 +106,40 @@ module.exports = function(className) {
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeEvents = __webpack_require__(7)
-var pjaxEvents = __webpack_require__(8)
-var turbolinksEvents = __webpack_require__(9)
-var turbolinksClassicDeprecatedEvents = __webpack_require__(11)
-var turbolinksClassicEvents = __webpack_require__(10)
+var nativeEvents = __webpack_require__(8)
+var pjaxEvents = __webpack_require__(9)
+var turbolinksEvents = __webpack_require__(10)
+var turbolinksClassicDeprecatedEvents = __webpack_require__(12)
+var turbolinksClassicEvents = __webpack_require__(11)
 
 // see what things are globally available
 // and setup event handlers to those things
@@ -164,14 +191,14 @@ module.exports = function(ujs) {
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Make a function which:
 // - First tries to require the name
 // - Then falls back to global lookup
 var fromGlobal = __webpack_require__(0)
-var fromRequireContext = __webpack_require__(12)
+var fromRequireContext = __webpack_require__(13)
 
 module.exports = function(reqctx) {
   var fromCtx = fromRequireContext(reqctx)
@@ -195,12 +222,6 @@ module.exports = function(reqctx) {
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
-
-/***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
@@ -214,15 +235,21 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var React = __webpack_require__(3)
-var ReactDOM = __webpack_require__(4)
-var ReactDOMServer = __webpack_require__(5)
+/* WEBPACK VAR INJECTION */(function(global) {var React = __webpack_require__(4)
+var ReactDOM = __webpack_require__(5)
+var ReactDOMServer = __webpack_require__(6)
 
-var detectEvents = __webpack_require__(1)
+var detectEvents = __webpack_require__(2)
 var constructorFromGlobal = __webpack_require__(0)
-var constructorFromRequireContextWithGlobalFallback = __webpack_require__(2)
+var constructorFromRequireContextWithGlobalFallback = __webpack_require__(3)
 
 var ReactRailsUJS = {
   // This attribute holds the name of component which should be mounted
@@ -387,6 +414,8 @@ ReactRailsUJS.handleUnmount = function(e) {
 if (typeof window !== "undefined") {
   // Only setup events for browser (not server-rendering)
   ReactRailsUJS.detectEvents()
+
+  global.ReactRailsUJS = ReactRailsUJS
 }
 
 // It's a bit of a no-no to populate the global namespace,
@@ -397,9 +426,10 @@ self.ReactRailsUJS = ReactRailsUJS
 
 module.exports = ReactRailsUJS
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -422,7 +452,7 @@ module.exports = {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -442,7 +472,7 @@ module.exports = {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -460,7 +490,7 @@ module.exports = {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -478,7 +508,7 @@ module.exports = {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -499,7 +529,7 @@ module.exports = {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 // Load React components by requiring them from "components/", for example:
